@@ -16,10 +16,7 @@ import shop.mtcoding.village.model.user.UserRepository;
 import shop.mtcoding.village.service.UserService;
 
 import javax.validation.Valid;
-<<<<<<< HEAD
-=======
 import java.time.LocalDateTime;
->>>>>>> a1acf53 (로그인 데이터 수정)
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -54,7 +51,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO, Errors Errors) {
 
-<<<<<<< HEAD
         ArrayList loginViewList = userService.로그인(loginDTO);
         String jwt = (String) loginViewList.get(0);
         UserResponse.LoginDTO loginViewDTO = new UserResponse.LoginDTO((Long) loginViewList.get(1),
@@ -67,22 +63,6 @@ public class UserController {
     //
 
     @GetMapping("/s/users/{id}") // 인증 확인
-=======
-        }
-        ArrayList loginViewList = userService.로그인(loginDTO);
-        String jwt = (String) loginViewList.get(0);
-        UserResponse.LoginDTO loginViewDTO = new UserResponse.LoginDTO((Long) loginViewList.get(1),(String) loginViewList.get(2), (String) loginViewList.get(3));
-
-
-        ResponseDTO<?> responseDTO = new ResponseDTO<>().data(loginViewDTO);
-        return ResponseEntity.ok().header(MyJwtProvider.HEADER, jwt ).body(responseDTO);
-    }
-
-//
-
-
-    @GetMapping("/s/users/{id}") //인증 확인
->>>>>>> a1acf53 (로그인 데이터 수정)
     public ResponseEntity<?> userCheck(@PathVariable Long id,
             @AuthenticationPrincipal MyUserDetails myUserDetails) {
 

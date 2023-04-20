@@ -150,7 +150,6 @@ insert into hashtag_tb (hashtag_name, place_id)
 values ('쇼핑몰촬영', 2);
 insert into hashtag_tb (hashtag_name, place_id)
 values ('부산연습실', 3);
-<<<<<<< HEAD
 
 insert into file_info_tb(type) values ('PLACE');
 insert into file_info_tb(type) values ('FACILITY');
@@ -159,7 +158,5 @@ insert into file_tb(file_info_id, file_name, file_url, status) values (1, '8.jpg
 insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'aa.jpg', 'https://news.dbhasjuhwuha.com/wp-content/uploads/2021/08/aa.jpg', 'WAIT');
 insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'bb8.jpg', 'https://news.ahjsbaghuwssplay.com/wp-content/uploads/2011/08/bb8.jpg', 'WAIT');
 
-=======
->>>>>>> a1acf53 (로그인 데이터 수정)
 
 commit;

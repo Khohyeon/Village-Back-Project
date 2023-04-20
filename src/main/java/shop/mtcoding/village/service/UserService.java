@@ -33,7 +33,6 @@ public class UserService {
      */
     @Transactional
     public UserResponse.JoinDTO 회원가입(UserRequest.JoinDTO joinDTO) {
-<<<<<<< HEAD
         try {
             // select
             String rawPassword = joinDTO.getPassword();
@@ -84,67 +83,3 @@ public class UserService {
 }
 
 
-=======
-        // select
-        String rawPassword = joinDTO.getPassword();
-        String encPassword = passwordEncoder.encode(rawPassword); // 60Byte
-        joinDTO.setPassword(encPassword);
-        User userPS = userRepository.save(joinDTO.toEntity());
-
-
-        return new UserResponse.JoinDTO(userPS);
-    }
-
-    @Transactional
-    public ArrayList 로그인(UserRequest.LoginDTO loginDTO) {
-        ArrayList loginViewList = new ArrayList();
-
-        Optional<User> userOP = userRepository.findByEmail(loginDTO.getEmail());
-        if (userOP.isPresent()) {
-            User userPS = userOP.get();
-            if (passwordEncoder.matches(loginDTO.getPassword(), userPS.getPassword())) {
-                String jwt = MyJwtProvider.create(userPS);
-                loginViewList.add(jwt);
-                loginViewList.add(userPS.getId());
-                loginViewList.add(userPS.getName());
-                loginViewList.add(userPS.getEmail());
-
-
-                return loginViewList;
-
-            } else {
-                throw new RuntimeException("패스워드 틀렷어");
-            }
-        } else {
-            throw new RuntimeException("존재하지않는 이메일입니다.");
-        }
-
-
-    }
-}
-
-//@Transactional(readOnly = true)
-//public ArrayList 로그인(UserRequest.LoginDTO loginDTO) {
-//
-//        ArrayList loginOutList = new ArrayList();
-//
-//        Optional<User> userOP = userRepository.findByEmail(loginDTO.getEmail());
-//        // 로그인 유저 아이디가 있다면
-//        if (userOP.isPresent()) {
-//        // 있으면 비밀번호 match (details를 안쓸거면 내가 비교해야되고, 암호화 된걸 처리해야 함)
-//        User userPS = userOP.get();
-//        // 로그인 입력 값과 DB password를 비교
-//        if (passwordEncoder.matches(loginDTO.getPassword(), userPS.getPassword())) {
-//        String jwt = MyJwtProvider.create(userPS); // 토큰 생성1
-//        loginOutList.add(jwt);
-//        loginOutList.add(userPS.getId());
-//        loginOutList.add(userPS.getRole());
-//        return loginOutList;
-//
-//        }
-//        throw new Exception400("패스워드 틀렸어");
-//        } else {
-//        throw new Exception400("유저네임 없어");
-//        }
-//        }
->>>>>>> a1acf53 (로그인 데이터 수정)
