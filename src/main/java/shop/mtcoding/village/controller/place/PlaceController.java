@@ -50,18 +50,18 @@ public class PlaceController {
         return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간 전체 보기", allPlace), HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<Page<PlaceSaveResponse>> getPage(Pageable pageable) {
-//        var page = placeService.getPage(pageable);
-//        var content = page.getContent()
-//                .stream()
-//                .map(Place::toDTO)
-//                .toList();
-//
-//        return ResponseEntity.ok(
-//                new PageImpl<>(content, pageable, page.getTotalElements())
-//        );
-//    }
+    // @GetMapping
+    // public ResponseEntity<Page<PlaceSaveResponse>> getPage(Pageable pageable) {
+    // var page = placeService.getPage(pageable);
+    // var content = page.getContent()
+    // .stream()
+    // .map(Place::toDTO)
+    // .toList();
+    //
+    // return ResponseEntity.ok(
+    // new PageImpl<>(content, pageable, page.getTotalElements())
+    // );
+    // }
 
     @PostMapping
     public @ResponseBody ResponseEntity<ResponseDTO> savePlace(
@@ -70,8 +70,6 @@ public class PlaceController {
     ) {
 
         String role = myUserDetails.getUser().getRole();
-
-        System.out.println("디버그 : " + role);
         var save = placeService.공간등록하기(placeSaveRequest);
 
         if (!role.equals("HOST")) {
@@ -109,6 +107,6 @@ public class PlaceController {
             placeService.공간삭제하기(optionalPlace.get());
     
             return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간 데이터 삭제 완료", null), HttpStatus.OK);
-        }
 
+    }
 }

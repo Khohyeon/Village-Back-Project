@@ -1,5 +1,9 @@
 package shop.mtcoding.village.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.net.HttpHeaders;
+import lombok.RequiredArgsConstructor;
+import okhttp3.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,13 +28,6 @@ public class ReservationService {
             return reservationRepository.save(reservationSaveRequest.toEntity());
         } catch (Exception500 e) {
             throw new Exception500("예약신청 오류" + e.getMessage());
-        }
-    
-
-        try {
-            return reservationRepository.save(reservationSaveRequest.toEntity());
-        } catch (Exception500 e) {
-            throw new Exception500("로그인 오류" + e.getMessage());
         }
     }
 }

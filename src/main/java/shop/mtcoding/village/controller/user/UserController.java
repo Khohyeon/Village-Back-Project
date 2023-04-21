@@ -36,34 +36,17 @@ public class UserController {
     }
 
     @PostMapping("/join")
-<<<<<<< HEAD
-
     public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO joinDTO, Errors Errors) {
 
         // select 됨
         UserResponse.JoinDTO data = userService.회원가입(joinDTO);
-
-=======
-    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO joinDTO) {
-
-
-
-        UserResponse.JoinDTO data = userService.회원가입(joinDTO);
-
-
-
->>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
         ResponseDTO<?> responseDTO = new ResponseDTO<>().data(data);
         return ResponseEntity.ok().body(responseDTO);
     }
 
     @PostMapping("/login")
-<<<<<<< HEAD
-    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO, Errors Errors) {
-=======
-    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO) {
->>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
 
+    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO, Errors Errors) {
         ArrayList loginViewList = userService.로그인(loginDTO);
         String jwt = (String) loginViewList.get(0);
         UserResponse.LoginDTO loginViewDTO = new UserResponse.LoginDTO((Long) loginViewList.get(1),
