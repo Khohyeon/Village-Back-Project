@@ -24,7 +24,7 @@ public class Search {
 
     @Comment("유저 아이디")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     @Comment("공간 정보")
@@ -37,8 +37,7 @@ public class Search {
     private String keyword;
 
     @Builder
-    public Search(Long id, User user, String keyword) {
-        this.id = id;
+    public Search(User user, String keyword) {
         this.user = user;
         this.keyword = keyword;
     }

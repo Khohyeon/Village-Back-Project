@@ -11,10 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.village.model.address.Address;
-import shop.mtcoding.village.model.category.Category;
-import shop.mtcoding.village.model.date.Dates;
-import shop.mtcoding.village.model.facilityInfo.FacilityInfo;
-import shop.mtcoding.village.model.hashtag.Hashtag;
 import shop.mtcoding.village.model.payment.Payment;
 import shop.mtcoding.village.model.payment.PaymentRepository;
 import shop.mtcoding.village.model.place.Place;
@@ -48,7 +44,7 @@ public class PaymentRepositoryTest {
     @BeforeEach
     public void init() {
         em.createNativeQuery("ALTER TABLE payment_tb ALTER COLUMN ID RESTART WITH 4L").executeUpdate();
-        setUpByPayment(PaymentStatus.WAIT, 40000);
+//        setUpByPayment(PaymentStatus.WAIT, 40000);
     }
 
     @Test
@@ -59,18 +55,18 @@ public class PaymentRepositoryTest {
         Assertions.assertNotEquals(paymentList.size(), 0);
 
         Payment payment = paymentList.get(0);
-        Assertions.assertEquals(payment.getTotalPrice(), 40000);
+        Assertions.assertEquals(payment.getTotalPrice(), 30000);
     }
 
     @Test
     @Transactional
     @DisplayName("결제 조회 및 수정 테스트")
     void selectAndUpdate() {
-        var optionalPayment = this.paymentRepository.findById(4L);
+        var optionalPayment = this.paymentRepository.findById(1L);
 
         if(optionalPayment.isPresent()) {
             var result = optionalPayment.get();
-            Assertions.assertEquals(result.getTotalPrice(), 40000);
+            Assertions.assertEquals(result.getTotalPrice(), 30000);
 
             var totalPrice = 45000;
             result.setTotalPrice(totalPrice);
@@ -86,7 +82,7 @@ public class PaymentRepositoryTest {
     @Transactional
     @DisplayName("결제 삽입 및 삭제 테스트")
     void insertAndDelete() {
-        Payment payment = setUpByPayment (PaymentStatus.WAIT, 50000);
+        Payment payment = setUpByPayment (PaymentStatus.COMPLETE, 50000);
         Optional<Payment> findPayment = this.paymentRepository.findById(payment.getId());
 
         if(findPayment.isPresent()) {
@@ -114,19 +110,6 @@ public class PaymentRepositoryTest {
         Review review = new Review().builder().user(user).starRating(5).content("내용").image("이미지").likeCount(3).build();
         this.entityManager.persist(review);
 
-        Category category = new Category().builder().categoryName("이름").build();
-        this.entityManager.persist(category);
-
-        Dates dates = new Dates().builder().dayOfWeekName(Collections.singletonList("월요일")).build();
-        this.entityManager.persist(dates);
-
-        FacilityInfo facilityName = new FacilityInfo().builder().facilityName(Collections.singletonList("화장실")).build();
-        this.entityManager.persist(facilityName);
-
-        Hashtag hashtagName = new Hashtag().builder().hashtagName(Collections.singletonList("연습실")).build();
-        this.entityManager.persist(hashtagName);
-
-
         Place place = new Place().builder().title("제목").address(address).tel("123123").placeIntroductionInfo("공간정보").notice("공간소개")
                 .startTime(LocalTime.from(LocalDateTime.now())).endTime(LocalTime.from(LocalDateTime.now())).build();
         this.entityManager.persist(place);
@@ -135,8 +118,9 @@ public class PaymentRepositoryTest {
                 .peopleNum(3).status(ReservationStatus.WAIT).build();
         this.entityManager.persist(reservation);
 
-        Payment payment = new Payment();
-        payment.setUser(user);
+        Payment payment = new Payment().builder().user(user).place(place).reservation(reservation).status(
+                PaymentStatus.WAIT
+        ).totalPrice(50000).build(); payment.setUser(user);
         payment.setPlace(place);
         payment.setReservation(reservation);
         payment.setStatus(status);

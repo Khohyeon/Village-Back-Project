@@ -1,7 +1,6 @@
 package shop.mtcoding.village.jpa;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,12 +32,12 @@ public class SearchRepositoryTest {
     private EntityManager em;
 
 
-    @BeforeEach
-    public void init() {
-        em.createNativeQuery("ALTER TABLE search_tb ALTER COLUMN ID RESTART WITH 4L").executeUpdate();
-
-        setUpBySearch("keyword4");
-    }
+//    @BeforeEach
+//    public void init() {
+//        em.createNativeQuery("ALTER TABLE search_tb ALTER COLUMN ID RESTART WITH 4L").executeUpdate();
+//
+//        setUpBySearch("keyword4");
+//    }
 
     @Test
     @Transactional
@@ -48,18 +47,18 @@ public class SearchRepositoryTest {
         Assertions.assertNotEquals(searches.size(), 0);
 
         Search search = searches.get(0);
-        Assertions.assertEquals(search.getKeyword(), "keyword4");
+        Assertions.assertEquals(search.getKeyword(), "연습실");
     }
 
     @Test
     @Transactional
     @DisplayName("검색 조회 및 수정 테스트")
     void selectAndUpdate() {
-        var optionalSearch = this.searchRepository.findById(4L);
+        var optionalSearch = this.searchRepository.findById(1L);
 
         if(optionalSearch.isPresent()) {
             var result = optionalSearch.get();
-            Assertions.assertEquals(result.getKeyword(), "keyword4");
+            Assertions.assertEquals(result.getKeyword(), "연습실");
 
             var keyword = "keyword55";
             result.setKeyword(keyword);
@@ -97,7 +96,7 @@ public class SearchRepositoryTest {
         User user = new User().builder().name("love").password("1234").email("ssar@nate.com").tel("1234").role("USER").profile("123123").build();
         this.entityManager.persist(user);
 
-        Search search = new Search();
+        Search search = new Search(user, keyword);
         search.setUser(user);
         search.setKeyword(keyword);
         return this.entityManager.persist(search);
