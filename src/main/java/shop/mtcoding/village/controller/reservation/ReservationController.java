@@ -66,6 +66,11 @@ public class ReservationController {
             @Valid @RequestBody ReservationSaveRequest reservationSaveRequest
             ) throws IOException {
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
         var saveReservation = reservationService.예약신청(reservationSaveRequest);
 
         Long placeId = saveReservation.getPlace().getId();

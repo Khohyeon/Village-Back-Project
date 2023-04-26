@@ -19,11 +19,17 @@ public class ReservationService {
     @Transactional
     public Reservation 예약신청(ReservationSaveRequest reservationSaveRequest) {
 
+<<<<<<< HEAD
         try {
             return reservationRepository.save(reservationSaveRequest.toEntity());
         } catch (Exception500 e) {
             throw new Exception500("예약신청 오류" + e.getMessage());
         }
+=======
+
+
+        return reservationRepository.save(reservationSaveRequest.toEntity());
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
     }
 
 }

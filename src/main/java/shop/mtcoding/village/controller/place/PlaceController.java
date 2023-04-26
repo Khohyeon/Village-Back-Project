@@ -65,9 +65,15 @@ public class PlaceController {
 
     @PostMapping
     public @ResponseBody ResponseEntity<ResponseDTO> savePlace(
+<<<<<<< HEAD
             @Valid @RequestBody PlaceSaveRequest placeSaveRequest, Errors Errors,
             @AuthenticationPrincipal MyUserDetails myUserDetails
     ) {
+=======
+            @Valid @RequestBody PlaceSaveRequest placeSaveRequest
+    ) {
+
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
 
         String role = myUserDetails.getUser().getRole();
 
@@ -82,6 +88,7 @@ public class PlaceController {
 
     @PutMapping("/host/place")
     public ResponseEntity<ResponseDTO> updatePlace(
+<<<<<<< HEAD
             @Valid @RequestBody PlaceUpdateRequest placeUpdateRequest, Errors Errors,
             @AuthenticationPrincipal MyUserDetails myUserDetails
     ) {
@@ -91,6 +98,12 @@ public class PlaceController {
         if (!role.equals("HOST")) {
             throw new MyConstException(RoleConst.notFound);
         }
+=======
+            @Valid @RequestBody PlaceUpdateRequest placeUpdateRequest
+        ){
+
+
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
 
         var update = placeService.공간수정하기(placeUpdateRequest);
 

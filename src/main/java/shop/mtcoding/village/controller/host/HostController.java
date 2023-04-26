@@ -24,8 +24,14 @@ public class HostController {
     private final HostService hostService;
 
     @PostMapping
+<<<<<<< HEAD
     public @ResponseBody ResponseEntity<ResponseDTO> saveHost(@Valid @RequestBody HostSaveRequest hostSaveDto,
             Errors Errors) {
+=======
+    public @ResponseBody ResponseEntity<ResponseDTO> saveHost(@Valid @RequestBody HostSaveRequest hostSaveDto){
+
+
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
 
         Host hostSave = hostService.호스트신청(hostSaveDto);
 

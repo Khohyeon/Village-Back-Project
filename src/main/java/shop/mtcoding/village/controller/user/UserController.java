@@ -8,7 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import shop.mtcoding.village.core.auth.MyUserDetails;
 import shop.mtcoding.village.core.jwt.MyJwtProvider;
-import shop.mtcoding.village.core.util.MyDateUtils;
 import shop.mtcoding.village.dto.ResponseDTO;
 import shop.mtcoding.village.dto.user.UserRequest;
 import shop.mtcoding.village.dto.user.UserResponse;
@@ -16,7 +15,6 @@ import shop.mtcoding.village.model.user.UserRepository;
 import shop.mtcoding.village.service.UserService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -38,18 +36,33 @@ public class UserController {
     }
 
     @PostMapping("/join")
+<<<<<<< HEAD
 
     public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO joinDTO, Errors Errors) {
 
         // select 됨
         UserResponse.JoinDTO data = userService.회원가입(joinDTO);
 
+=======
+    public ResponseEntity<?> join(@RequestBody @Valid UserRequest.JoinDTO joinDTO) {
+
+
+
+        UserResponse.JoinDTO data = userService.회원가입(joinDTO);
+
+
+
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
         ResponseDTO<?> responseDTO = new ResponseDTO<>().data(data);
         return ResponseEntity.ok().body(responseDTO);
     }
 
     @PostMapping("/login")
+<<<<<<< HEAD
     public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO, Errors Errors) {
+=======
+    public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO) {
+>>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
 
         ArrayList loginViewList = userService.로그인(loginDTO);
         String jwt = (String) loginViewList.get(0);
