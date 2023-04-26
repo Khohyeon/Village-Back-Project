@@ -149,9 +149,13 @@ public class PlaceService {
 
                 facilityInfoList.add(savefacilityInfo);
             }
+            // 공간 update
+            Place updatePlace = placeRepository.save(placeUpdateRequest.toEntity());
+
+
             return updatePlace;
         } catch (Exception500 e) {
-            throw new Exception500("공간수정 오류" + e.getMessage());
+            throw new Exception500("로그인 오류" + e.getMessage());
         }
 
 
