@@ -1,17 +1,10 @@
 insert into user_tb (name, password, email, tel, role, profile, created_at)
-<<<<<<< HEAD
 values ('ssar', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'ssar@naver.com', '01012345678', 'USER', '/images/dora.png', NOW());
 insert into user_tb (name, password, email, tel, role, profile, created_at)
 values ('Jane', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Jane@naver.com', '01023455678', 'MANAGER', '/images/dora.png', NOW());
 insert into user_tb (name, password, email, tel, role, profile, created_at)
 values ('Bob', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Bob@naver.com', '01067895678', 'ADMIN', '/images/dora.png', NOW());
-=======
-values ('ssar', '1234', 'ssar@naver.com', '01012345678', 'USER', '/images/dora.png', NOW());
-insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('Jane', '1234', 'Jane@naver.com', '01023455678', 'MANAGER', '/images/dora.png', NOW());
-insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('Bob', '1234', 'Bob@naver.com', '01067895678', 'ADMIN', '/images/dora.png', NOW());
->>>>>>> 5a7a011 (충돌 수정 완료)
+
 
 insert into address_tb(road_full_addr, sgg_nm, zip_no, lat, lng)
 values ('부산 부산진구 중앙대로 688 한준빌딩 2층', '부산 부산진구', '47296', '12', '15');
@@ -20,23 +13,13 @@ values ('부산 부산진구 중앙대로 688 한준빌딩 12층', '부산 사�
 insert into address_tb(road_full_addr, sgg_nm, zip_no, lat, lng)
 values ('부산 부산진구 중앙대로 688 한준빌딩 22층', '부산 사하구', '27296', '412', '125');
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 5a7a011 (충돌 수정 완료)
 insert into account_tb(user_id, account_num)
 values (1, '123456-01-123456');
 insert into account_tb(user_id, account_num)
 values (2, '123434-01-123354');
 insert into account_tb(user_id, account_num)
-<<<<<<< HEAD
 values (3, '333456-01-111244');
-=======
-values (1, '333456-01-111244');
 
-
->>>>>>> 5a7a011 (충돌 수정 완료)
 
 insert into place_tb (user_id, title, address_id, tel, notice, place_introduction_info, max_people, max_parking,
                       price_per_hour,
@@ -122,7 +105,13 @@ insert into payment_tb (user_id, place_id, reservation_id, status, total_price)
 values (1, 1, 1, 'COMPLETE', 20000);
 insert into payment_tb (user_id, place_id, reservation_id, status, total_price)
 values (1, 1, 1, 'FAIL', 10000);
---
+
+insert into dates_tb (day_of_week_name, place_id)
+values ('월요일', 1);
+insert into dates_tb (day_of_week_name, place_id)
+values ('화요일', 1);
+insert into dates_tb (day_of_week_name, place_id)
+values ('수요일', 2);
 
 insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (1, 1, 1, '내용1', 'WAIT');
@@ -130,14 +119,6 @@ insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (2, 2, 2, '내용2', 'WAIT');
 insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (3, 3, 3, '내용3', 'WAIT');
-
-
-insert into dates_tb (day_of_week_name, place_id)
-values ('월요일,화요일,수요일,목요일', 1);
-insert into dates_tb (day_of_week_name, place_id)
-values ('월요일,목요일,금요일,토요일', 1);
-insert into dates_tb (day_of_week_name, place_id)
-values ('수요일',  2);
 
 insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (1, 1, 1, '내용1', 'WAIT');
@@ -161,18 +142,8 @@ insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'aa.jp
 insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'bb8.jpg', 'https://news.ahjsbaghuwssplay.com/wp-content/uploads/2011/08/bb8.jpg', 'WAIT');
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-insert into notice_tb (user_id, place_id, payment_id, content, status)
-values (1, 1, 1, '내용1', 'WAIT');
-insert into notice_tb (user_id, place_id, payment_id, content, status)
-values (2, 2, 2, '내용2', 'WAIT');
-insert into notice_tb (user_id, place_id, payment_id, content, status)
-values (3, 3, 3, '내용3', 'WAIT');
-
 commit;
-=======
-<<<<<<< HEAD
+
 
 -- insert into user_tb(name, password, email, tel, role, profile) values ('cos', '1234', 'cos@nate.com', '010-1111-2222', 'USER', 'profile1')
 -- insert into user_tb(name, password, email, tel, role, profile) values ('ssar1', '1234', 'ssar@nate.com', '010-1244-2232', 'USER', 'profile2')
@@ -242,11 +213,4 @@ commit;
 -- insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'aa.jpg', 'https://news.dbhasjuhwuha.com/wp-content/uploads/2021/08/aa.jpg', 'WAIT');
 -- insert into file_tb(file_info_id, file_name, file_url, status) values (2, 'bb8.jpg', 'https://news.ahjsbaghuwssplay.com/wp-content/uploads/2011/08/bb8.jpg', 'WAIT');
 --
--- commit;
-=======
-commit;
->>>>>>> 392c057 (Reservation 완료, Payment 진행중)
->>>>>>> a0a7fb1 (Reservation 완료, Payment 진행중)
-=======
-commit;
->>>>>>> 5a7a011 (충돌 수정 완료)
+

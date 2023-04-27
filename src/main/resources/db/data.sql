@@ -125,15 +125,9 @@ values (3, 3, 3, '내용3', 'WAIT');
 
 
 insert into dates_tb (day_of_week_name, place_id)
-<<<<<<< HEAD
 values ('월요일', 1);
 insert into dates_tb (day_of_week_name, place_id)
 values ('화요일', 1);
-=======
-values ('월요일,화요일,수요일,목요일', 1);
-insert into dates_tb (day_of_week_name, place_id)
-values ('월요일,목요일,금요일,토요일', 1);
->>>>>>> a1acf53 (로그인 데이터 수정)
 insert into dates_tb (day_of_week_name, place_id)
 values ('수요일',  2);
 

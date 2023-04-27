@@ -72,7 +72,7 @@ public class PlaceController {
     // );
     // }
 
-    @PostMapping
+    @PostMapping("/host/place")
     public @ResponseBody ResponseEntity<ResponseDTO> savePlace(
             @Valid @RequestBody PlaceSaveRequest placeSaveRequest, Errors Errors,
             @AuthenticationPrincipal MyUserDetails myUserDetails
