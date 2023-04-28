@@ -4,16 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import shop.mtcoding.village.core.exception.Exception400;
 import shop.mtcoding.village.core.exception.MyConstException;
 import shop.mtcoding.village.core.firebase.FirebaseCloudMessageService;
 import shop.mtcoding.village.core.firebase.RequestDTO;
 import shop.mtcoding.village.dto.ResponseDTO;
 import shop.mtcoding.village.dto.reservation.request.ReservationSaveRequest;
 import shop.mtcoding.village.model.place.Place;
-import shop.mtcoding.village.model.place.PlaceRepository;
+import shop.mtcoding.village.model.place.PlaceJpaRepository;
 import shop.mtcoding.village.model.reservation.Reservation;
 import shop.mtcoding.village.model.reservation.ReservationRepository;
 import shop.mtcoding.village.notFoundConst.ReservationConst;
@@ -38,7 +36,7 @@ public class ReservationController {
 
     private final FirebaseCloudMessageService firebaseCloudMessageService;
 
-    private final PlaceRepository placeRepository;
+    private final PlaceJpaRepository placeJpaRepository;
 
     @GetMapping("/s/reservation")
     public ResponseEntity<?> getReservation(){
@@ -66,16 +64,11 @@ public class ReservationController {
             @Valid @RequestBody ReservationSaveRequest reservationSaveRequest
             ) throws IOException {
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 1ec5787 (Exception 처리 전체 수정 완료)
         var saveReservation = reservationService.예약신청(reservationSaveRequest);
 
         Long placeId = saveReservation.getPlace().getId();
 
-        Place byId = placeRepository.findById(placeId).get();
+        Place byId = placeJpaRepository.findById(placeId).get();
 
         LocalDate date = DateUtils.fromLocalDateTime(reservationSaveRequest.getDate());
         System.out.println(date); // 예시 출력: 2023-04-25
