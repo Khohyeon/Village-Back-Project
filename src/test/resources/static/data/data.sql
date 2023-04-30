@@ -13,10 +13,6 @@ values ('부산 부산진구 중앙대로 688 한준빌딩 12층', '부산 사�
 insert into address_tb(road_full_addr, sgg_nm, zip_no, lat, lng)
 values ('부산 부산진구 중앙대로 688 한준빌딩 22층', '부산 사하구', '27296', '412', '125');
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3782052 (충돌 해결)
 insert into account_tb(user_id, account_num)
 values (1, '123456-01-123456');
 insert into account_tb(user_id, account_num)
