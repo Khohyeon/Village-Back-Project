@@ -5,6 +5,7 @@ import lombok.ToString;
 import shop.mtcoding.village.dto.category.request.CategorySaveDTO;
 import shop.mtcoding.village.dto.date.request.DateSaveDTO;
 import shop.mtcoding.village.dto.facilityInfo.request.FacilityInfoSaveDTO;
+import shop.mtcoding.village.dto.file.dto.FileSaveDTO;
 import shop.mtcoding.village.dto.hashtag.request.HashtagSaveDTO;
 import shop.mtcoding.village.model.address.Address;
 import shop.mtcoding.village.model.place.Place;
@@ -12,6 +13,7 @@ import shop.mtcoding.village.model.place.Place;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @ToString
@@ -20,10 +22,8 @@ public class PlaceSaveRequest {
     @NotBlank(message = "제목을 입력해주세요.")
     private String title;
 
-    @NotBlank(message = "주소을 입력해주세요.")
-    private String placeAddress;
+    private Address address;
 
-    //    @Null
     private String tel;
 
     @NotNull(message = "대여 가능 시작시간을 입력해주세요.")
@@ -47,26 +47,20 @@ public class PlaceSaveRequest {
     @NotNull(message = "시간당 금액을 입력해주세요.")
     private Integer pricePerHour;
 
-
     // 다른 엔티티들
-
     @NotNull(message = "사용가능한 요일을 설정해주세요.")
-    private DateSaveDTO dayOfWeek;
+    private List<DateSaveDTO.DateSaveDto> dayOfWeek;
 
-    //    @Null
-    private HashtagSaveDTO hashtag;
+    private List<HashtagSaveDTO.HashtagSaveDto> hashtag;
 
-    //    @Null
-    private FacilityInfoSaveDTO facilityInfo;
+    private List<FacilityInfoSaveDTO.FacilityInfoSaveDto> facilityInfo;
 
     @NotNull(message = "카테고리를 등록해주세요.")
-    private CategorySaveDTO category;
+    private String categoryName;
+
+    private List<FileSaveDTO.FileSaveDto> image;
 
     public Place toEntity() {
-
-        Address address = new Address();
-        address.setRoadFullAddr(placeAddress);
-
         Place place = new Place();
         place.setTitle(title);
         place.setAddress(address);
@@ -81,8 +75,6 @@ public class PlaceSaveRequest {
         return new Place(
                 title, address, tel, startTime, endTime, placeIntroductionInfo, notice, maxPeople, maxParking, pricePerHour
         );
-
-        // , categoryName, date, facilityName, hashtagName
     }
 
 

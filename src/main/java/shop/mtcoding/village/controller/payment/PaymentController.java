@@ -3,17 +3,19 @@ package shop.mtcoding.village.controller.payment;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import shop.mtcoding.village.dto.ReceiptDTO;
-import shop.mtcoding.village.model.payment.BootPay;
+import shop.mtcoding.village.dto.bootpay.ReceiptDTO;
 import shop.mtcoding.village.model.payment.PaymentRepository;
 import shop.mtcoding.village.service.PaymentService;
 
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/payment")
 public class PaymentController {
 
     private final PaymentRepository paymentRepository;
@@ -28,8 +30,9 @@ public class PaymentController {
         this.objectMapper = objectMapper;
     }
 
-    @PostMapping("/s/payment")
-    public ResponseEntity<?> save(@RequestBody ReceiptDTO receiptDTO) throws JsonProcessingException {
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping
+    public ResponseEntity<HashMap<Object,Object>> save(@RequestBody ReceiptDTO receiptDTO) throws JsonProcessingException {
 
         objectMapper.writeValueAsString(receiptDTO);
 

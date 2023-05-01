@@ -20,7 +20,6 @@ import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
-
 @Entity
 @Getter
 @Setter
@@ -80,9 +79,6 @@ public class Place {
     @Comment("마감 시간")
     private LocalTime endTime;
 
-
-
-
     public Place(User user, String title, Address address, String tel, String placeIntroductionInfo, String notice, FileInfo fileInfo, Integer maxPeople,
             Integer maxParking, Integer pricePerHour, LocalTime startTime, LocalTime endTime) {
         this.user = user;
@@ -123,11 +119,9 @@ public class Place {
     }
 
     public PlaceUpdateResponse toUpdateResponse() {
-
         return new PlaceUpdateResponse(
                 title, address, tel, startTime.toString(), endTime.toString(), placeIntroductionInfo, pricePerHour, maxPeople, maxParking, notice
         );
     }
-
 
 }
