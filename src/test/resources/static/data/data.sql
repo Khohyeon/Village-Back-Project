@@ -12,15 +12,12 @@ values ('부산 부산진구 중앙대로 688 한준빌딩 12층', '부산 사�
 insert into address_tb(road_full_addr, sgg_nm, zip_no, lat, lng)
 values ('부산 부산진구 중앙대로 688 한준빌딩 22층', '부산 사하구', '27296', '412', '125');
 
-
-
 insert into account_tb(user_id, account_num)
 values (1, '123456-01-123456');
 insert into account_tb(user_id, account_num)
 values (1, '123434-01-123354');
 insert into account_tb(user_id, account_num)
 values (1, '333456-01-111244');
-
 
 
 insert into place_tb (user_id, title, address_id, tel, notice, place_introduction_info, max_people, max_parking,
@@ -43,9 +40,6 @@ insert into review_tb (user_id, place_id, star_rating, content, image, like_coun
 values (2, 2, 4, '조금 아쉬운 부분도 있지만 전체적으로 만족스러웠어요', NULL, 5, now());
 insert into review_tb (user_id, place_id, star_rating, content, image, like_count, created_at)
 values (3, 3, 3, '그저 그랬어요', NULL, 2, now());
-
-
-
 
 insert into facility_info_tb (facility_name, place_id)
 values ('카페', 1);
@@ -122,14 +116,6 @@ values (2, 2, 2, '내용2', 'WAIT');
 insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (3, 3, 3, '내용3', 'WAIT');
 
-
-insert into dates_tb (day_of_week_name, place_id)
-values ('월요일,화요일,수요일,목요일', 1);
-insert into dates_tb (day_of_week_name, place_id)
-values ('월요일,목요일,금요일,토요일', 1);
-insert into dates_tb (day_of_week_name, place_id)
-values ('수요일',  2);
-
 insert into notice_tb (user_id, place_id, payment_id, content, status)
 values (1, 1, 1, '내용1', 'WAIT');
 insert into notice_tb (user_id, place_id, payment_id, content, status)
@@ -143,6 +129,7 @@ insert into hashtag_tb (hashtag_name, place_id)
 values ('쇼핑몰촬영', 2);
 insert into hashtag_tb (hashtag_name, place_id)
 values ('부산연습실', 3);
+
 
 insert into file_info_tb(type) values ('PLACE');
 insert into file_info_tb(type) values ('FACILITY');

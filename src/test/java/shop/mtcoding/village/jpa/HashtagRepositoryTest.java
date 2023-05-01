@@ -68,7 +68,6 @@ public class HashtagRepositoryTest {
         if (optionalHashtag.isPresent()) {
             var result = optionalHashtag.get();
             Assertions.assertEquals(result.getHashtagName(), "파티룸");
-
             String hashtag = "음식점";
             result.setHashtagName(hashtag);
             Hashtag merge = entityManager.merge(result);
