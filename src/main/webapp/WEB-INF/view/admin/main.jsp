@@ -110,7 +110,7 @@
                             <tr id="list-${place.id}" class="text-center">
                                 <td>${place.id}</td>
                                 <td>${place.title}</td>
-                                <td>${place.address.roadFullAddr}</td>
+                                <td>${place.address.address}</td>
                                 <td>${place.tel}</td>
                                 <td>${place.pricePerHour}</td>
                                 <td><button class="btn btn-danger btn-sm" onclick="deleteByBoardId(${place.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
@@ -126,17 +126,20 @@
                             <th>번호</th>
                             <th>예약자</th>
                             <th>예약장소</th>
+                            <th>예약인원</th>
+                            <th>예약시간</th>
                             <th>예약금액</th>
                             <th>비고</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${reservationList}" var="reservation">
-
                             <tr id="list-${reservation.id}" class="text-center">
                                 <td>${reservation.id}</td>
                                 <td>${reservation.user.name}</td>
                                 <td>${reservation.place.title}</td>
+                                <td>${reservation.peopleNum}</td>
+                                <td>${reservation.startTime} ~ ${reservation.endTime}</td>
                                 <td>${reservation.place.pricePerHour}</td>
                                 <td><button class="btn btn-danger btn-sm" onclick="deleteByReplyId(${reservation.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
                             </tr>

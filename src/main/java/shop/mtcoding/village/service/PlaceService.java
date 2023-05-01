@@ -100,6 +100,7 @@ public class PlaceService {
                 String imgPath = s3Service.upload(files.getFileName(), Base64Decoded.convertBase64ToMultipartFile(files.getData()));
                 files.setFileUrl(imgPath);
                 File save = fileRepository.save(files.toEntity(files.getName(), files.getFileUrl()));
+                System.out.println("디버그 : " + save);
 //                fileList.add(save);
 
                 fileService.save(placeRequest.getImage().get(0));

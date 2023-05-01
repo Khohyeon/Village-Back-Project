@@ -106,7 +106,7 @@ public class NoticeRepositoryTest {
         User user = new User().builder().name("love").password("1234").email("ssar@nate.com").tel("1234").role("USER").profile("123123").build();
         this.entityManager.persist(user);
 
-        Address address = new Address().builder().roadFullAddr("도로명주소").sggNm("시군구").zipNo("우편번호").lat("경도").lng("위도").build();
+        Address address = new Address().builder().address("도로명주소").sigungu("시군구").zonecode("우편번호").detailAddress("상세주소").x("경도").y("위도").build();
         this.entityManager.persist(address);
 
         Review review = new Review().builder().user(user).starRating(5).content("내용").image("이미지").likeCount(3).build();

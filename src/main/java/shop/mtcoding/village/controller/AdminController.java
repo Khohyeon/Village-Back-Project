@@ -59,7 +59,6 @@ public class AdminController {
     @DeleteMapping
     public String delete(@PathVariable Long id) {
 
-//        userRepository.delete();
 
         return "admin/main";
     }

@@ -1,10 +1,7 @@
 package shop.mtcoding.village.model.file;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Comment;
 import shop.mtcoding.village.core.jpa.BaseTime;
 import shop.mtcoding.village.dto.file.dto.FileDTO;
@@ -17,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "file_tb")
+@ToString
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
