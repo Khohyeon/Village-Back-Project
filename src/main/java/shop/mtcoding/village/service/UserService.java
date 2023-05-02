@@ -105,10 +105,12 @@ public class UserService {
 
             byUserId.setStatus(HostStatus.SIGN);
 
+            hostRepository.save(byUserId);
+
             user.setRole("HOST");
             userRepository.save(user);
         } catch (Exception e) {
-            throw new Exception500("Host 변경에 실패 하였습니다"+e.getMessage());
+            throw new Exception500("Host 변경에 실패 하였습니다 "+e.getMessage());
         }
         return user;
     }

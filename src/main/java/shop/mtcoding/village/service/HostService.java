@@ -23,7 +23,6 @@ public class HostService {
     @Transactional
     public Host 호스트신청(HostSaveRequest hostSaveDto) {
         try {
-
             User byName = userRepository.findByName(hostSaveDto.getHostName());
 
             hostSaveDto.setStatus(HostStatus.WAIT);

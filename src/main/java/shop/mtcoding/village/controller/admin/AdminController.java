@@ -1,4 +1,4 @@
-package shop.mtcoding.village.controller;
+package shop.mtcoding.village.controller.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,9 +20,11 @@ import shop.mtcoding.village.model.reservation.ReservationRepository;
 import shop.mtcoding.village.model.user.User;
 import shop.mtcoding.village.model.user.UserRepository;
 import shop.mtcoding.village.notFoundConst.RoleConst;
+import shop.mtcoding.village.util.status.HostStatus;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -39,8 +41,6 @@ public class AdminController {
     private final HttpSession session;
 
     private final HostRepository hostRepository;
-
-
 
 
     public AdminController(UserRepository userRepository, PlaceJpaRepository placeRepository, ReservationRepository reservationRepository, PaymentRepository paymentRepository, HttpSession session, HostRepository hostRepository) {
@@ -76,17 +76,21 @@ public class AdminController {
     }
 
     @GetMapping("/z/admin/host")
-    public String host(Model model,
-    @AuthenticationPrincipal MyUserDetails myUserDetails
-    ) {
-
-        Long id = myUserDetails.getUser().getId();
+    public String host(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+//
+//        Long id = myUserDetails.getUser().getId();
+//        System.out.println("디버그 : " + id);
+//        User principal = (User) session.getAttribute("principal");
 
         List<User> userList = userRepository.findAll();
-        model.addAttribute("userList", userList);
 
-        Host host = hostRepository.findByUser_Id(id);
-        model.addAttribute("host", host);
+        Optional<User> byId = userRepository.findById(1L);
+        User user = byId.get();
+
+        Host host = hostRepository.findByUser_Id(1L);
+        if (host.getStatus().equals(HostStatus.WAIT)) {
+            model.addAttribute("user", user);
+        }
 
         return "admin/host";
     }

@@ -6,46 +6,38 @@
         <div class="col">
             <h1>호스트 신청 페이지</h1>
             <hr/>
-            <c:choose>
-                <c:when test="${host.status == WAIT}">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr class="text-center">
-                            <th>번호</th>
-                            <th>아이디</th>
-                            <th>이메일</th>
-                            <th>권한</th>
-                            <th>가입일</th>
-                            <th>호스트신청</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${userList}" var="user">
-                            <tr id="list-${user.id}" class="text-center">
-                                <td>${user.id}</td>
-                                <td>${user.name}</td>
-                                <td>${user.email}</td>
-                                <td>${user.role}</td>
-                                <td>${user.createdAt}</td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm" onclick="acceptHost(${user.id})">수락</button>
-                                    <button class="btn btn-danger btn-sm" onclick="failHost(${user.id})">거절</button></td>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-
-                </c:when>
-            <c:otherwise>
-        </c:otherwise>
-        </c:choose>
+            <table class="table table-bordered">
+                <thead>
+                <tr class="text-center">
+                    <th>번호</th>
+                    <th>아이디</th>
+                    <th>이메일</th>
+                    <th>권한</th>
+                    <th>가입일</th>
+                    <th>호스트신청</th>
+                </tr>
+                </thead>
+                <tbody>
+<%--                <c:forEach items="${user}" var="user">--%>
+                    <tr id="list-${user.id}" class="text-center">
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.role}</td>
+                        <td>${user.createdAt}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="acceptHost(${user.id})">수락</button>
+                            <button class="btn btn-danger btn-sm" onclick="failHost(${user.id})">거절</button></td>
+                        </td>
+                    </tr>
+<%--                </c:forEach>--%>
+                </tbody>
+            </table>
 
         </div>
     </div>
 </div>
 <script>
-
     function acceptHost(id) {
         $.ajax({
             type: "post",

@@ -57,7 +57,9 @@ public class UserController {
     @PostMapping("/login")
 
     public ResponseEntity<?> login(@RequestBody @Valid UserRequest.LoginDTO loginDTO, Errors Errors) {
+
         ArrayList loginViewList = userService.로그인(loginDTO);
+
         String jwt = (String) loginViewList.get(0);
         UserResponse.LoginDTO loginViewDTO = new UserResponse.LoginDTO((Long) loginViewList.get(1),
                 (String) loginViewList.get(2), (String) loginViewList.get(3));
@@ -112,6 +114,5 @@ public class UserController {
         User user1 = userService.호스트변경(user.get());
         return new ResponseEntity<>(new ResponseDTO<>(1, 200, "Host 변경 성공", user1.getRole()),HttpStatus.OK);
     }
-
 
 }

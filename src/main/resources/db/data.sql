@@ -16,9 +16,9 @@ insert into address_tb(address, sigungu, zonecode, detail_address, x, y)
 values ('부산 부산진구 중앙대로 688 한준빌딩 4층', '부산 부산진구', '47296', '401호' ,'12', '215');
 
 
-insert into host_tb (user_id, address_id, business_num) values (1, 1, 123-45-78);
-insert into host_tb (user_id, address_id, business_num) values (2, 1, 123-41-72);
-insert into host_tb (user_id, address_id, business_num) values (2, 2, 123-35-18);
+insert into host_tb (user_id, address_id, status, business_num) values (1, 1, 'WAIT', 123-45-78);
+insert into host_tb (user_id, address_id, status, business_num) values (2, 1, 'DENY', 123-41-72);
+insert into host_tb (user_id, address_id, status, business_num) values (2, 2, 'SIGN', 123-35-18);
 
 insert into account_tb(user_id, account_num)
 values (1, '123456-01-123456');
