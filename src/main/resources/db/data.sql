@@ -3,7 +3,10 @@ values ('ssar', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 
 insert into user_tb (name, password, email, tel, role, profile, created_at)
 values ('Jane', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Jane@naver.com', '01023455678', 'HOST', '/images/dora.png', NOW());
 insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('Bob', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Bob@naver.com', '01067895678', 'ADMIN', '/images/dora.png', NOW());
+values ('Bob', '1234', 'Bob@naver.com', '01067895678', 'ADMIN', '/images/dora.png', NOW());
+
+
+
 
 insert into address_tb(address, sigungu, zonecode, detail_address, x, y)
 values ('부산 부산진구 중앙대로 688 한준빌딩 2층', '부산 부산진구', '47296', '201호' ,'12', '15');
@@ -13,6 +16,9 @@ insert into address_tb(address, sigungu, zonecode, detail_address, x, y)
 values ('부산 부산진구 중앙대로 688 한준빌딩 4층', '부산 부산진구', '47296', '401호' ,'12', '215');
 
 
+insert into host_tb (user_id, address_id, business_num) values (1, 1, 123-45-78);
+insert into host_tb (user_id, address_id, business_num) values (2, 1, 123-41-72);
+insert into host_tb (user_id, address_id, business_num) values (2, 2, 123-35-18);
 
 insert into account_tb(user_id, account_num)
 values (1, '123456-01-123456');

@@ -8,10 +8,12 @@ import shop.mtcoding.village.core.exception.Exception500;
 import shop.mtcoding.village.core.jwt.MyJwtProvider;
 import shop.mtcoding.village.dto.user.UserRequest;
 import shop.mtcoding.village.dto.user.UserResponse;
-import shop.mtcoding.village.model.fcm.Fcm;
 import shop.mtcoding.village.model.fcm.FcmRepository;
+import shop.mtcoding.village.model.host.Host;
+import shop.mtcoding.village.model.host.HostRepository;
 import shop.mtcoding.village.model.user.User;
 import shop.mtcoding.village.model.user.UserRepository;
+import shop.mtcoding.village.util.status.HostStatus;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -24,6 +26,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final FcmRepository fcmRepository;
+    private final HostRepository hostRepository;
 
     /**
      * 1. 트랜잭션 관리
@@ -41,12 +44,10 @@ public class UserService {
             joinDTO.setPassword(encPassword);
             User userPS = userRepository.save(joinDTO.toEntity());
 
-
             return new UserResponse.JoinDTO(userPS);
         } catch (Exception500 e) {
             throw new Exception500("회원가입 오류" + e.getMessage());
         }
-
 
     }
 
@@ -81,6 +82,35 @@ public class UserService {
         }
 
 
+    }
+
+    @Transactional
+    public void 유저삭제(User user) {
+        try {
+            userRepository.delete(user);
+        } catch (Exception500 e) {
+            throw new Exception500("유저삭제 오류" + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Transactional
+    public User 호스트변경(User user) {
+        try {
+            Host byUserId = hostRepository.findByUser_Id(user.getId());
+
+            byUserId.setStatus(HostStatus.SIGN);
+
+            user.setRole("HOST");
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new Exception500("Host 변경에 실패 하였습니다"+e.getMessage());
+        }
+        return user;
     }
 }
 

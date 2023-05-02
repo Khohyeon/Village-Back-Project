@@ -65,7 +65,7 @@ public class ReservationController {
         System.out.println("디버그 : " + optionalUser);
 
         if (optionalUser.isEmpty()) {
-            throw new MyConstException(ReservationConst.notFound);
+            throw new MyConstException(ReservationConst.notfound);
         }
 
         Reservation reservation = optionalUser.get();
@@ -106,5 +106,19 @@ public class ReservationController {
 
         return new ResponseEntity<>(new ResponseDTO<>(1, 200, "예약 신청 완료", saveReservation.toResponse()), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('HOST')")
+    public ResponseEntity<?> delete(
+            @PathVariable Long id
+    ) {
+//        Optional<Reservation> reservation = reservationService.getReservation(id);
+//        if (reservation.isEmpty()) {
+//            throw new MyConstException(ReservationConst.notfound);
+//        }
+        reservationService.예약삭제(id);
+        return new ResponseEntity<>(new ResponseDTO<>(1, 200 , "예약내역 삭제완료", null), HttpStatus.OK);
+    }
+
 
 }

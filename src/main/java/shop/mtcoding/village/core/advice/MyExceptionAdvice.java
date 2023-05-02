@@ -63,11 +63,11 @@ public class MyExceptionAdvice {
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> serverError(Exception e){
-        ResponseDTO<?> responseDTO = new ResponseDTO<>().fail(-1, 500, e.getMessage(), "Null");
-        return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<?> serverError(Exception e){
+//        ResponseDTO<?> responseDTO = new ResponseDTO<>().fail(-1, 500, e.getMessage(), "Null");
+//        return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
 
 }

@@ -1,42 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <%-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --%>
-    <script src="https://kit.fontawesome.com/32aa2b8683.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Village</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/hostForm">호스트신청</a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</nav>
-
+<%@ include file="../layout/header.jsp" %>
 
 <div class="container container-fluid mt-5">
     <div class="row">
@@ -72,7 +35,6 @@
                             <th>이메일</th>
                             <th>권한</th>
                             <th>가입일</th>
-                            <th>호스트신청</th>
                             <th>비고</th>
                         </tr>
                         </thead>
@@ -84,8 +46,9 @@
                                 <td>${user.email}</td>
                                 <td>${user.role}</td>
                                 <td>${user.createdAt}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="acceptHost(${user.id})">수락</button>
-                                    <button class="btn btn-danger btn-sm" onclick="failHost(${user.id})">거절</button></td>
+<%--                                <td>--%>
+<%--                                    <button class="btn btn-danger btn-sm" onclick="acceptHost(${user.id})">수락</button>--%>
+<%--                                    <button class="btn btn-danger btn-sm" onclick="failHost(${user.id})">거절</button></td>--%>
                                 <td><button class="btn btn-danger btn-sm" onclick="deleteByUserId(${user.id})">삭제</button>
                                 </td>
                             </tr>
@@ -113,7 +76,7 @@
                                 <td>${place.address.address}</td>
                                 <td>${place.tel}</td>
                                 <td>${place.pricePerHour}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteByBoardId(${place.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteByPlaceId(${place.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -141,7 +104,7 @@
                                 <td>${reservation.peopleNum}</td>
                                 <td>${reservation.startTime} ~ ${reservation.endTime}</td>
                                 <td>${reservation.place.pricePerHour}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteByReplyId(${reservation.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteByReservationId(${reservation.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
                             </tr>
                         </c:forEach>
 
@@ -166,7 +129,7 @@
                                 <td>${payment.user.name}</td>
                                 <td>${payment.place.title}</td>
                                 <td>${payment.totalPrice}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteByReplyId(${payment.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
+                                <td><button class="btn btn-danger btn-sm" onclick="deleteByPaymentId(${payment.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
                             </tr>
                         </c:forEach>
 
@@ -184,45 +147,60 @@
     function deleteByUserId(id) {
         $.ajax({
             type: "delete",
-            url: "/user/"+id ,
+            url: "/users/"+id ,
             dataType: "json"
         }).done((res) => {    // 20x 일때
             alert(res.msg);
-            location.href = "/admin";
+            location.href = "/z/admin/main";
             $('#list-'+id).remove();
         }).fail((err) => {    // 40x , 50x 일때
             console.log(err);
             alert(err.responseJSON.msg);
         });
     }
-    function deleteByBoardId(id) {
+    function deleteByPlaceId(id) {
         $.ajax({
             type: "delete",
-            url: "/board/"+id ,
+            url: "/places/"+id ,
             dataType: "json"
         }).done((res) => {    // 20x 일때
             alert(res.msg);
-            location.href = "/admin";
+            location.href = "/z/admin/main";
             $('#list-'+id).remove();
         }).fail((err) => {    // 40x , 50x 일때
             // console.log(err);
             alert(err.responseJSON.msg);
         });
     }
-    function deleteByReplyId(id) {
+    function deleteByReservationId(id) {
         $.ajax({
             type: "delete",
-            url: "/reply/"+id ,
+            url: "/reservation/"+id ,
             dataType: "json"
         }).done((res) => {    // 20x 일때
             alert(res.msg);
-            location.href = "/admin";
+            location.href = "/z/admin/main";
             $('#list-'+id).remove();
         }).fail((err) => {    // 40x , 50x 일때
             // console.log(err);
             alert(err.responseJSON.msg);
         });
     }
+    function deleteByPaymentId(id) {
+        $.ajax({
+            type: "delete",
+            url: "/payment/"+id ,
+            dataType: "json"
+        }).done((res) => {    // 20x 일때
+            alert(res.msg);
+            location.href = "/z/admin/main";
+            $('#list-'+id).remove();
+        }).fail((err) => {    // 40x , 50x 일때
+            // console.log(err);
+            alert(err.responseJSON.msg);
+        });
+    }
+
 </script>
 </body>
 </html>

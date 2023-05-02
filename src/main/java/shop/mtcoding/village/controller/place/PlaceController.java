@@ -97,7 +97,7 @@ public class PlaceController {
         return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간 데이터 수정 완료", update), HttpStatus.OK);
         }
         
-        @DeleteMapping("/host/{id}")
+        @DeleteMapping("/{id}")
         @PreAuthorize("hasRole('HOST')")
         public ResponseEntity<?> deletePlace(
                 @PathVariable Long id

@@ -16,6 +16,7 @@ import shop.mtcoding.village.model.reservation.Reservation;
 import shop.mtcoding.village.model.reservation.ReservationRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @Service
@@ -33,5 +34,16 @@ public class ReservationService {
         } catch (Exception500 e) {
             throw new Exception500("예약신청 오류" + e.getMessage());
         }
+    }
+
+    @Transactional
+    public void 예약삭제(Long id) {
+//        reservationRepository.delete(reservation);
+        reservationRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<Reservation> getReservation(Long id) {
+        return reservationRepository.findById(id);
     }
 }

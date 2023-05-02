@@ -32,6 +32,7 @@ public class Reservation {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @Comment("예약한 유저 정보")
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Comment("공간 정보")

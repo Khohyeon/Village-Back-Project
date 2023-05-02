@@ -153,6 +153,7 @@ public class PlaceService {
 
     }
 
+    @Transactional
     public Place 공간수정하기(PlaceUpdateRequest placeUpdateRequest) {
         try {
 

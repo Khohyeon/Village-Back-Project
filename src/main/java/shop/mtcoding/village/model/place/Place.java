@@ -8,17 +8,11 @@ import org.hibernate.annotations.OnDeleteAction;
 import shop.mtcoding.village.dto.place.response.PlaceSaveResponse;
 import shop.mtcoding.village.dto.place.response.PlaceUpdateResponse;
 import shop.mtcoding.village.model.address.Address;
-import shop.mtcoding.village.model.category.Category;
-import shop.mtcoding.village.model.date.Dates;
-import shop.mtcoding.village.model.facilityInfo.FacilityInfo;
 import shop.mtcoding.village.model.file.FileInfo;
-import shop.mtcoding.village.model.hashtag.Hashtag;
 import shop.mtcoding.village.model.user.User;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Getter
@@ -38,6 +32,7 @@ public class Place {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Comment("공간 제목")
