@@ -14,6 +14,7 @@ import shop.mtcoding.village.model.host.HostRepository;
 import shop.mtcoding.village.model.user.User;
 import shop.mtcoding.village.model.user.UserRepository;
 import shop.mtcoding.village.util.status.HostStatus;
+import shop.mtcoding.village.util.status.UserStatus;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -85,11 +86,12 @@ public class UserService {
     }
 
     @Transactional
-    public void 유저삭제(User user) {
+    public User 유저비활성화(User user) {
         try {
-            userRepository.delete(user);
+            user.setStatus(UserStatus.INACTIVE);
+            return userRepository.save(user);
         } catch (Exception500 e) {
-            throw new Exception500("유저삭제 오류" + e.getMessage());
+            throw new Exception500("유저비활성화 오류" + e.getMessage());
         }
     }
 
@@ -113,6 +115,17 @@ public class UserService {
             throw new Exception500("Host 변경에 실패 하였습니다 "+e.getMessage());
         }
         return user;
+    }
+
+    @Transactional
+    public User 유저활성화(User user) {
+
+        try {
+            user.setStatus(UserStatus.ACTIVE);
+            return userRepository.save(user);
+        } catch (Exception500 e) {
+            throw new Exception500("유저활성화 오류" + e.getMessage());
+        }
     }
 }
 

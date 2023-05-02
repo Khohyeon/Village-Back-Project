@@ -45,7 +45,7 @@
             dataType: "json"
         }).done((res) => {
             alert(res.msg);
-            location.href = "/z/admin/host";
+            location.href = "/z/admin/main";
         }).fail((err) =>{
             alert(err.responseJSON.msg);
         });

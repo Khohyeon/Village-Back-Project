@@ -35,6 +35,7 @@
                             <th>이메일</th>
                             <th>권한</th>
                             <th>가입일</th>
+                            <th>활성화상태</th>
                             <th>비고</th>
                         </tr>
                         </thead>
@@ -46,11 +47,17 @@
                                 <td>${user.email}</td>
                                 <td>${user.role}</td>
                                 <td>${user.createdAt}</td>
-<%--                                <td>--%>
-<%--                                    <button class="btn btn-danger btn-sm" onclick="acceptHost(${user.id})">수락</button>--%>
-<%--                                    <button class="btn btn-danger btn-sm" onclick="failHost(${user.id})">거절</button></td>--%>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteByUserId(${user.id})">삭제</button>
-                                </td>
+                                <td>${user.status}</td>
+                                <c:choose>
+                                    <c:when test="${user.status == 'ACTIVE'}">
+                                        <td><button class="btn btn-danger btn-sm" onclick="deleteByUserId(${user.id})">비활성화</button></td>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <td><button class="btn btn-danger btn-sm" onclick="activeByUserId(${user.id})">활성화</button></td>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -65,6 +72,7 @@
                             <th>주소</th>
                             <th>전화번호</th>
                             <th>시간당금액</th>
+                            <th>활성화상태</th>
                             <th>비고</th>
                         </tr>
                         </thead>
@@ -76,7 +84,15 @@
                                 <td>${place.address.address}</td>
                                 <td>${place.tel}</td>
                                 <td>${place.pricePerHour}</td>
-                                <td><button class="btn btn-danger btn-sm" onclick="deleteByPlaceId(${place.id})">삭제</button></td> <!-- 삭제 버튼 추가 -->
+                                <td>${place.status}</td>
+                                <c:choose>
+                                    <c:when test="${place.status == 'ACTIVE'}">
+                                        <td><button class="btn btn-danger btn-sm" onclick="deleteByPlaceId(${place.id})">비활성화</button></td> <!-- 삭제 버튼 추가 -->
+                                    </c:when>
+                                        <c:otherwise>
+                                        <td><button class="btn btn-danger btn-sm" onclick="activeByPlaceId(${place.id})">활성화</button></td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -195,6 +211,38 @@
             alert(res.msg);
             location.href = "/z/admin/main";
             $('#list-'+id).remove();
+        }).fail((err) => {    // 40x , 50x 일때
+            // console.log(err);
+            alert(err.responseJSON.msg);
+        });
+    }
+
+    function activeByUserId(id) {
+        $.ajax({
+            type: "post",
+            url: "/users/"+id ,
+            dataType: "json"
+        }).done((res) => {    // 20x 일때
+            alert(res.msg);
+            // console.log(res);
+            location.href = "/z/admin/main";
+            $('#list-'+id).reload();
+        }).fail((err) => {    // 40x , 50x 일때
+            // console.log(err);
+            alert(err.responseJSON.msg);
+        });
+    }
+
+    function activeByPlaceId(id) {
+        $.ajax({
+            type: "post",
+            url: "/places/"+id ,
+            dataType: "json"
+        }).done((res) => {    // 20x 일때
+            alert(res.msg);
+            // console.log(res);
+            location.href = "/z/admin/main";
+            $('#list-'+id).reload();
         }).fail((err) => {    // 40x , 50x 일때
             // console.log(err);
             alert(err.responseJSON.msg);

@@ -10,6 +10,7 @@ import shop.mtcoding.village.dto.place.response.PlaceUpdateResponse;
 import shop.mtcoding.village.model.address.Address;
 import shop.mtcoding.village.model.file.FileInfo;
 import shop.mtcoding.village.model.user.User;
+import shop.mtcoding.village.util.status.PlaceStatus;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -73,6 +74,10 @@ public class Place {
 
     @Comment("마감 시간")
     private LocalTime endTime;
+
+    @Comment("공간상태")
+    @Enumerated(EnumType.STRING)
+    private PlaceStatus status;
 
     public Place(User user, String title, Address address, String tel, String placeIntroductionInfo, String notice, FileInfo fileInfo, Integer maxPeople,
             Integer maxParking, Integer pricePerHour, LocalTime startTime, LocalTime endTime) {

@@ -84,6 +84,8 @@ public class AdminController {
 
         List<User> userList = userRepository.findAll();
 
+
+        // TODO 유저 아이디 받아 와야함 우째 받지
         Optional<User> byId = userRepository.findById(1L);
         User user = byId.get();
 

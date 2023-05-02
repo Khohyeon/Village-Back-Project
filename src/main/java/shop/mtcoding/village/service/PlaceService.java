@@ -30,6 +30,7 @@ import shop.mtcoding.village.model.place.PlaceJpaRepository;
 import shop.mtcoding.village.model.place.PlaceRepository;
 import shop.mtcoding.village.model.review.ReviewRepository;
 import shop.mtcoding.village.util.Base64Decoded;
+import shop.mtcoding.village.util.status.PlaceStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -144,11 +145,25 @@ public class PlaceService {
     }
 
     @Transactional
-    public void 공간삭제하기(Place place) {
+    public Place 공간비활성화(Place place) {
         try {
-            placeJpaRepository.delete(place);
+
+            place.setStatus(PlaceStatus.INACTIVE);
+            return placeJpaRepository.save(place);
         } catch (Exception500 e) {
-            throw new Exception500("공간삭제 오류" + e.getMessage());
+            throw new Exception500("공간비활성화 오류" + e.getMessage());
+        }
+
+    }
+
+    @Transactional
+    public Place 공간활성화(Place place) {
+        try {
+
+            place.setStatus(PlaceStatus.ACTIVE);
+            return placeJpaRepository.save(place);
+        } catch (Exception500 e) {
+            throw new Exception500("공간활성화 오류" + e.getMessage());
         }
 
     }

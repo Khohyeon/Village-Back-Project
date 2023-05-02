@@ -20,6 +20,7 @@ import shop.mtcoding.village.model.place.PlaceJpaRepository;
 import shop.mtcoding.village.notFoundConst.PlaceConst;
 import shop.mtcoding.village.notFoundConst.RoleConst;
 import shop.mtcoding.village.service.PlaceService;
+import shop.mtcoding.village.util.status.PlaceStatus;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -99,17 +100,33 @@ public class PlaceController {
         
         @DeleteMapping("/{id}")
         @PreAuthorize("hasRole('HOST')")
-        public ResponseEntity<?> deletePlace(
+        public ResponseEntity<ResponseDTO<PlaceStatus>> deletePlace(
                 @PathVariable Long id
         ){
             var optionalPlace = placeService.getPlace(id);
             if (optionalPlace.isEmpty()) {
                 throw new MyConstException(PlaceConst.notFound);
             }
-    
-            placeService.공간삭제하기(optionalPlace.get());
-    
-            return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간 데이터 삭제 완료", null), HttpStatus.OK);
+
+            Place inactivePlace = placeService.공간비활성화(optionalPlace.get());
+
+            return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간비활성화 완료", inactivePlace.getStatus()), HttpStatus.OK);
 
     }
+
+        @PostMapping("/{id}")
+        @PreAuthorize("hasRole('HOST')")
+        public ResponseEntity<ResponseDTO<PlaceStatus>> activePlace(
+                @PathVariable Long id
+        ){
+            var optionalPlace = placeService.getPlace(id);
+            if (optionalPlace.isEmpty()) {
+                throw new MyConstException(PlaceConst.notFound);
+            }
+
+            Place activePlace = placeService.공간활성화(optionalPlace.get());
+
+            return new ResponseEntity<>(new ResponseDTO<>(1, 200, "공간활성화 완료", activePlace.getStatus()), HttpStatus.OK);
+
+        }
 }

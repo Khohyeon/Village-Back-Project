@@ -1,9 +1,9 @@
-insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('ssar', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'ssar@naver.com', '01012345678', 'USER', '/images/dora.png', NOW());
-insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('Jane', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Jane@naver.com', '01023455678', 'HOST', '/images/dora.png', NOW());
-insert into user_tb (name, password, email, tel, role, profile, created_at)
-values ('Bob', '1234', 'Bob@naver.com', '01067895678', 'ADMIN', '/images/dora.png', NOW());
+insert into user_tb (name, password, email, tel, role, profile, status, created_at)
+values ('ssar', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'ssar@naver.com', '01012345678', 'USER', '/images/dora.png','ACTIVE', NOW());
+insert into user_tb (name, password, email, tel, role, profile, status, created_at)
+values ('Jane', '$2a$10$AY7h/0uPoe5UtfMZxmxNq.d4KOTZiKbZFvbM3k7vlsfpjAJd0fTvW', 'Jane@naver.com', '01023455678', 'HOST', '/images/dora.png','ACTIVE', NOW());
+insert into user_tb (name, password, email, tel, role, profile, status,  created_at)
+values ('Bob', '1234', 'Bob@naver.com', '01067895678', 'ADMIN',  '/images/dora.png','ACTIVE', NOW());
 
 
 
@@ -30,17 +30,17 @@ values (1, '333456-01-111244');
 
 
 insert into place_tb (user_id, title, address_id, tel, notice, place_introduction_info, max_people, max_parking,
-                      price_per_hour,
+                      price_per_hour, status,
                       start_time, end_time)
-values (1, '스튜디오 르온드', 1, '01012345678', '좋은 공간입니다.', '좋은 공간입니다. 이용해보세요!', 10, 5, 4000, NOW(), NOW());
+values (1, '스튜디오 르온드', 1, '01012345678', '좋은 공간입니다.', '좋은 공간입니다. 이용해보세요!', 10, 5, 4000, 'ACTIVE', NOW(), NOW());
 insert into place_tb (user_id, title, address_id, tel, notice, place_introduction_info, max_people, max_parking,
-                      price_per_hour,
+                      price_per_hour, status,
                       start_time, end_time)
-values (2, '스튜디오 STUDIO', 2, '01012345679', '멋진 공간입니다.', '멋진 공간입니다. 이용해보세요!', 10, 10, 5000, NOW(), NOW());
+values (2, '스튜디오 STUDIO', 2, '01012345679', '멋진 공간입니다.', '멋진 공간입니다. 이용해보세요!', 10, 10, 5000, 'ACTIVE', NOW(), NOW());
 insert into place_tb (user_id, title, address_id, tel, notice, place_introduction_info, max_people, max_parking,
-                      price_per_hour,
+                      price_per_hour, status,
                       start_time, end_time)
-values (3, '업타운댄스뮤직 아카데미', 3, '01012345680', '편안한 공간입니다.', '편안한 공간입니다. 이용해보세요!', 10, 15, 3000, NOW(), NOW());
+values (3, '업타운댄스뮤직 아카데미', 3, '01012345680', '편안한 공간입니다.', '편안한 공간입니다. 이용해보세요!', 10, 15, 3000, 'ACTIVE', NOW(), NOW());
 
 
 insert into review_tb (user_id, place_id, star_rating, content, image, like_count, created_at)

@@ -21,6 +21,7 @@ import shop.mtcoding.village.model.user.User;
 import shop.mtcoding.village.model.user.UserRepository;
 import shop.mtcoding.village.notFoundConst.UserConst;
 import shop.mtcoding.village.service.UserService;
+import shop.mtcoding.village.util.status.UserStatus;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -91,15 +92,27 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> delete(
+    public ResponseEntity<ResponseDTO<UserStatus>> delete(
             @PathVariable Long id
     ) {
         var optionalUser = userService.getUser(id);
         if (optionalUser.isEmpty()) {
             throw new MyConstException(UserConst.notfound);
         }
-        userService.유저삭제(optionalUser.get());
-        return new ResponseEntity<>(new ResponseDTO<>(1, 200 , "유저정보 삭제", null), HttpStatus.OK);
+        User inactiveUser = userService.유저비활성화(optionalUser.get());
+        return new ResponseEntity<>(new ResponseDTO<>(1, 200 , "유저비활성화 완료", inactiveUser.getStatus()), HttpStatus.OK);
+    }
+
+    @PostMapping("/users/{id}")
+    public ResponseEntity<ResponseDTO<UserStatus>> active(
+            @PathVariable Long id
+    ) {
+        var optionalUser = userService.getUser(id);
+        if (optionalUser.isEmpty()) {
+            throw new MyConstException(UserConst.notfound);
+        }
+        User ActiveUser = userService.유저활성화(optionalUser.get());
+        return new ResponseEntity<>(new ResponseDTO<>(1, 200 , "유저활성화 완료", ActiveUser.getStatus()), HttpStatus.OK);
     }
 
     @PostMapping("/users/host/{id}")
