@@ -108,6 +108,43 @@ https://www.youtube.com/watch?v=X2QB7HTBATU&ab_channel=%EB%A9%94%ED%83%80%EC%BD%
 
 <br>
 
+> ## 백엔드 의존성 주입
+
+```
+   // restdoc
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+	// jsp
+	implementation 'javax.servlet:jstl'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+	// AWS S3
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	//native query qlrm
+	implementation group: 'org.qlrm', name: 'qlrm', version: '2.1.1'
+	// firebase 의존성
+	implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.2.2'
+	implementation 'com.google.firebase:firebase-admin:9.1.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.3.0'
+	implementation 'io.sentry:sentry-spring-boot-starter:6.17.0'
+	implementation 'io.sentry:sentry-logback:6.17.0'
+  ```
+
 > ## 플러터 의존성 주입
 
 ```
